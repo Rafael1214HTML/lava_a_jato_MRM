@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MRM</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Cor de fundo */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Centraliza o conteúdo */
+        }
+
+        h1 {
+            color: black;
+            font-size: 40px;
+        }
+
+        h2 {
+            color: grey;
+            font-size: 25px;
+        }
+
+        p {
+            color: red;
+            font-size: 25px;
+        }
+
+        img {
+            width: 700px;
+            height: 400px; /* Altura inicial definida no CSS */
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: red; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            font-size: 25px; /* Tamanho da fonte */
+            padding: 10px 20px; /* Espaçamento interno */
+            border: none; /* Remover borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: darkred; /* Cor ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Parte do texto do bem-vindo -->
+    <h1>Obrigado por nos agendar </h1>
+   
+<head>
+    <style>
+        h1 {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Agora é só entregar seu carro para nós e seu carro vai voltar limpo com segurança</h2>
+</body>
+
+<p><img id="carroImg" src="Carinha_de_sorriso.png" alt="Carro" style="width: 800px; height: 500px;"></p>
+
+<body>  
+
+  
+   
+    <!-- A parte que será alterada -->
+    <h1 id="textoAlterado"> Aproveite as promoções, toda semana tem novidades!</h1>
+
+    <body>
+   
+ <h1 id="textoAlterado" style="font-size: 20px;">Qualquer dúvida, é só ligar para esse número esse <span style="color: blue;">(19)</span> <span style="color: blue;">97125-9678</span></h1>
+
+
+    <script>
+        // Alterar o tamanho da fonte diretamente pela programação
+        document.getElementById('textoAlterado').style.fontSize = '30px';  // Altere o valor para o tamanho desejado
+    </script>
+    </body>
+
+
+
+    <script>
+        // Função para controlar a altura e a cor do texto
+        window.onload = function() {
+            var texto = document.getElementById('textoAlterado');
+            texto.style.color = 'blue';  // Altera a cor para verde
+            texto.style.fontSize = ' 20px';  // Altera o tamanho da fonte para 36px
+        };
+    </script>
+
+</body>
+    
+
+    <!-- Alterando o botão para redirecionar para uma nova página -->
+    <button type="button" onclick="window.location.href='MRMprogrmação.html';">Voltar para pagina inicial </button>
+
+    <script>
+        // Função que altera a altura da imagem programaticamente
+        function alterarAltura() {
+            var img = document.getElementById('carroImg');
+            img.height = 600;  // Altera diretamente a altura da imagem para 600px (por exemplo)
+        }
+
+        // Chama a função alterarAltura assim que o site for carregado
+        window.onload = alterarAltura;
+    </script>
+
+</body>
+</html>

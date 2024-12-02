@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MRM</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Cor de fundo da página */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Centraliza o conteúdo */
+        }
+
+        h1 {
+            color: black;
+            font-size: 40px;
+        }
+
+        h2 {
+            color: grey;
+            font-size: 25px;
+        }
+
+        p {
+            color: red;
+            font-size: 25px;
+        }
+
+        img {
+            width: 700px;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: red; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            font-size: 25px; /* Tamanho da fonte */
+            padding: 10px 20px; /* Espaçamento interno */
+            border: none; /* Remover borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: darkred; /* Cor ao passar o mouse */
+        }
+
+        ul {
+            background-color: #e0e0e0; /* Cor de fundo da lista */
+            padding: 20px;
+            border-radius: 10px; /* Bordas arredondadas da lista */
+            list-style-type: none; /* Remove os marcadores padrão da lista */
+            margin: 20px auto; /* Adiciona espaço ao redor da lista */
+            width: 50%; /* Define a largura da lista */
+        }
+
+        li {
+            font-size: 20px; /* Tamanho da fonte dos itens da lista */
+            padding: 10px 0; /* Espaçamento entre os itens */
+        }
+
+    </style>
+</head>
+<body>
+
+    
+    <!-- Lista com plano de fundo -->
+    <ul>
+        
+ <h1 style="color: red;">Desconto de <span style="color: black;"> 5% </span></h1>
+
+   <form id="formulario">
+    <ul>
+        <li>
+            <label for="cores" style="font-size: 25px;">Formas de lavagem:</label>
+            <select id="cores" name="cor" style="font-size: 20px;">
+                <option value=""></option>
+                <option value="Lavagem de dentro do carro: R$ 25,00">Lavagem de dentro do carro: R$ 25,00</option>
+                <option value="Lavagem de fora do carro: R$ 25,00">Lavagem de fora do carro: R$ 25,00</option>
+                <option value="Lavagem do porta mala: R$ 10,00">Lavagem do porta mala: R$ 10,00</option>
+                <option value="Lavagem de tudo: R$ 60,00">Lavagem de tudo: R$ 60,00</option>
+            </select>
+        </li>
+
+        <li>
+            <label for="carros" style="font-size: 25px;">Adicionais na lavagem:</label>
+            <select id="carros" name="carro" style="font-size: 20px;">
+                <option value=""></option>
+                <option value="Produto no banco: R$ 9,00">Produto no banco: R$ 9,00</option>
+                <option value="Produto no pneu: R$ 7,50">Produto no pneu: R$ 7,50</option>
+                <option value="Produto no vidro: R$ 5,99">Produto no vidro: R$ 5,99</option>
+                <option value="Produto no plastico: R$ 5,99">Produto no plastico: R$ 5,99</option>
+                <option value="Cera no carro: R$ 8,00">Cera no carro: R$ 8,00</option>
+                <option value="Todos os produtos R$ 34,00">Todos os produtos R$ 34,00</option>
+            </select>
+        </li>
+
+        <li>
+            <label for="formas-pagamento" style="font-size: 25px;">Forma de pagamento:</label>
+            <select id="formas-pagamento" name="forma-pagamento" style="font-size: 20px;">
+                <option value=""></option>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+            </select>
+        </li>
+
+        <li>
+            <label for="email" style="font-size: 25px;">Email:</label>
+            <input type="email" id="email" name="email" required style="font-size: 20px; width: 200px;">
+        </li>
+
+        <li>
+            <label for="telefone" style="font-size: 25px;">Número de telefone:</label>
+            <input type="text" id="telefone" name="telefone" required style="font-size: 20px; width: 200px;">
+        </li>
+
+        <li>
+            <button type="button" onclick="validarFormulario()" style="font-size: 25px;">Agendar lavagem</button>
+        </li>
+    </ul>
+</form>
+
+<p id="mensagem" style="color: red; font-size: 20px; display: none;">Falta algo</p>
+
+<script>
+    function validarFormulario() {
+        // Resetando as cores de erro
+        resetarErros();
+
+        var formaLavagem = document.getElementById("cores");
+        var adicionais = document.getElementById("carros");
+        var pagamento = document.getElementById("formas-pagamento");
+        var email = document.getElementById("email");
+        var telefone = document.getElementById("telefone");
+
+        var erro = false;
+
+        // Verificar campos obrigatórios e destacar os que estão vazios
+        if (formaLavagem.value === "") {
+            formaLavagem.style.borderColor = "red";
+            erro = true;
+        }
+
+        if (adicionais.value === "") {
+            adicionais.style.borderColor = "red";
+            erro = true;
+        }
+
+        if (pagamento.value === "") {
+            pagamento.style.borderColor = "red";
+            erro = true;
+        }
+
+        if (email.value === "") {
+            email.style.borderColor = "red";
+            erro = true;
+        }
+
+        if (telefone.value === "") {
+            telefone.style.borderColor = "red";
+            erro = true;
+        }
+
+        if (erro) {
+            // Se houver algum erro, mostra a mensagem
+            document.getElementById("mensagem").style.display = "block";
+        } else {
+            // Caso contrário, oculta a mensagem de erro
+            document.getElementById("mensagem").style.display = "none";
+            // Exibe um alerta de sucesso
+            alert("Sua lavagem foi agendada");
+
+            // Redireciona o usuário para a página inicial após o agendamento
+            window.location.href = "MRMprogrmação.html";  // Aqui você pode definir o URL da sua página inicial
+        }
+    }
+
+    function resetarErros() {
+        // Resetando a borda vermelha de todos os campos
+        document.getElementById("cores").style.borderColor = "";
+        document.getElementById("carros").style.borderColor = "";
+        document.getElementById("formas-pagamento").style.borderColor = "";
+        document.getElementById("email").style.borderColor = "";
+        document.getElementById("telefone").style.borderColor = "";
+    }
+</script>
+
+</script>
+
+
+<script>
+    
+    
+</script>
+
+</ul>
+
+   
+
+</body>
+</html>

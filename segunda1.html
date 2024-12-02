@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <meta charset="UTF-8">
+    <title>MRM</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: black;
+            font-size: 40px;
+        }
+        h2 {
+            color: grey;
+            font-size: 25px;
+        }
+        p {
+            color: red;
+            font-size: 25px;
+        }
+        img {
+            width: 700px;
+            height: 400px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            font-size: 25px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        ul {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            list-style-type: none;
+            margin: 20px auto;
+            width: 80%;
+        }
+        li {
+            font-size: 20px;
+            padding: 10px 0;
+        }
+        select, input {
+            width: 300px;
+            font-size: 20px;
+            padding: 10px;
+        }
+        button {
+            font-size: 28px;
+            padding: 15px 25px;
+        }
+        img {
+            width: 900px;
+            height: 500px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Send Email</h1>
+
+    <ul>
+        <h1 id="descontoTexto" style="color: red; font-weight: bold; text-decoration: underline; text-decoration-color: black;">
+            Desconto de <span id="percentualDesconto" style="color: black; font-weight: bold; text-decoration: underline; text-decoration-color: black;">5%</span>
+        </h1>
+
+        <script>
+            window.onload = function() {
+                var descontoTexto = document.getElementById('descontoTexto');
+                var tamanhoFonte = 35;
+                descontoTexto.style.fontSize = tamanhoFonte + 'px';
+            };
+        </script>
+
+        <form id="formulario">
+            <ul>
+                <li>
+                    <label for="formas-lavagem" style="font-size: 20px;">Formas de lavagem:</label>
+                    <select id="formas-lavagem" name="cor" style="font-size: 15px;" onchange="validarFormulario()">
+                        <option value=""></option>
+                        <option value="Lavagem de dentro do carro: R$ 25,00">Lavagem de dentro do carro: R$ 25,00</option>
+                        <option value="Lavagem de fora do carro: R$ 25,00">Lavagem de fora do carro: R$ 25,00</option>
+                        <option value="Lavagem do porta mala: R$ 10,00">Lavagem do porta mala: R$ 10,00</option>
+                        <option value="Lavagem de tudo: R$ 60,00">Lavagem de tudo: R$ 60,00</option>
+                    </select>
+                </li>
+
+                <li>
+                    <label for="adicionais-lavagem" style="font-size: 20px;">Adicionais na lavagem:</label>
+                    <select id="adicionais-lavagem" name="carro" style="font-size: 15px;" onchange="validarFormulario()">
+                        <option value=""></option>
+                        <option value="Produto no banco: R$ 9,00">Produto no banco: R$ 9,00</option>
+                        <option value="Produto no pneu: R$ 7,50">Produto no pneu: R$ 7,50</option>
+                        <option value="Produto no vidro: R$ 5,99">Produto no vidro: R$ 5,99</option>
+                        <option value="Produto no plastico: R$ 5,99">Produto no plastico: R$ 5,99</option>
+                        <option value="Cera no carro: R$ 8,00">Cera no carro: R$ 8,00</option>
+                        <option value="Todos os produtos R$ 34,00">Todos os produtos R$ 34,00</option>
+                    </select>
+                </li>
+
+                <li>
+                    <label for="formas-pagamento" style="font-size: 20px;">Forma de pagamento:</label>
+                    <select id="formas-pagamento" name="forma-pagamento" style="font-size: 15px;" onchange="validarFormulario()">
+                        <option value=""></option>
+                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                    </select>
+                </li>
+
+                <li>
+                    <label for="email" style="font-size: 20px;">Email:</label>
+                    <input type="email" id="email" name="email" required style="font-size: 15px; width: 200px;" oninput="mascaraEmail(this); validarFormulario()">
+                </li>
+
+                <li>
+                    <label for="telefone" style="font-size: 20px;">Número de telefone:</label>
+                    <input type="text" id="telefone" name="telefone" required style="font-size: 15px; width: 200px;" maxlength="15" oninput="mascaraTelefone(this); validarFormulario()">
+                </li>
+
+                <li>
+                   massage <br>
+                   <button type="button" id="agendarBtn" onclick="agendarLavagem()" disabled style="font-size: 20px;">Agendar lavagem</button>
+                </li>
+            </ul>
+        </form>
+    </ul>
+
+    <script>
+        // Inicialize o EmailJS com seu userID
+        //emailjs.init("OwY2ejow991Tf-EE5");  // Substitua pelo seu USER ID do EmailJS
+
+        function validarFormulario() {
+            var formasLavagem = document.getElementById("formas-lavagem");
+            var adicionaisLavagem = document.getElementById("adicionais-lavagem");
+            var formasPagamento = document.getElementById("formas-pagamento");
+            var email = document.getElementById("email");
+            var telefone = document.getElementById("telefone");
+
+            // Verifica se todos os campos estão preenchidos corretamente
+            var isValid = formasLavagem.value !== "" && adicionaisLavagem.value !== "" && formasPagamento.value !== "" && email.value !== "" && telefone.value !== "";
+
+            // Habilita o botão se todos os campos estiverem válidos
+            document.getElementById("agendarBtn").disabled = !isValid;
+        }
+
+        function agendarLavagem() {
+            // Validação final
+            var formasLavagem = document.getElementById("formas-lavagem");
+            var adicionaisLavagem = document.getElementById("adicionais-lavagem");
+            var formasPagamento = document.getElementById("formas-pagamento");
+            var email = document.getElementById("email");
+            var telefone = document.getElementById("telefone");
+
+            // Inicializando o EmailJS corretamente
+            emailjs.init("OwY2ejow991Tf-EE5");  // Substitua pelo seu USER ID do EmailJS
+
+            var templateParams = {
+                formasLavagem: formasLavagem.value,
+                adicionaisLavagem: adicionaisLavagem.value,
+                formasPagamento: formasPagamento.value,
+                email: email.value,
+                telefone: telefone.value,
+            };
+
+            // Enviar o e-mail usando o EmailJS
+            emailjs.send('service_m0u8meb', 'template_8hswb3s', templateParams)
+                .then(function(response) {
+                    alert("Sua lavagem foi agendada com sucesso!");
+                    console.log('SUCCESS', response);
+                    // Redireciona para a próxima página após o envio bem-sucedido
+                    window.location.href = "Terçeira.html";
+                }, function(error) {
+                    console.log('FAILED', error);
+                    alert("Houve um erro ao agendar a lavagem. Erro: " + (error.text || error.message || 'Erro desconhecido'));
+                });
+        }
+
+        // Função para aplicar a máscara no telefone
+        function mascaraTelefone(telefone) {
+            var valor = telefone.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            if (valor.length <= 10) {
+                telefone.value = valor.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3'); // Máscara para 10 dígitos
+            } else {
+                telefone.value = valor.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3'); // Máscara para 11 dígitos
+            }
+        }
+
+        // Função para aplicar a máscara no email e garantir que tenha @gmail.com
+        function mascaraEmail(email) {
+            var valor = email.value;
+            if (!valor.includes('@gmail.com')) {
+                email.value = valor.split('@')[0] + '@gmail.com'; // Adiciona @gmail.com se não tiver
+            }
+        }
+    </script>
+</body>
+</html>

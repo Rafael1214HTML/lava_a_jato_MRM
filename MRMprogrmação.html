@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MRM</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Cor de fundo */
+            font-family: Arial, sans-serif; /* Fonte do texto */
+            text-align: center; /* Centraliza o conteúdo */
+        }
+
+        h1 {
+            color: black; /* Cor inicial do texto */
+            font-size: 40px;
+        }
+
+        h2 {
+            color: grey;
+            font-size: 25px;
+        }
+
+        p {
+            color: red;
+            font-size: 25px;
+        }
+
+        img {
+            width: 700px;
+            height: 400px; /* Altura inicial definida no CSS */
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: red; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            font-size: 25px; /* Tamanho da fonte */
+            padding: 10px 20px; /* Espaçamento interno */
+            border: none; /* Remover borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: darkred; /* Cor ao passar o mouse */
+        }
+
+        #carroImg {
+            height: 300px;
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Parte do texto de boas-vindas -->
+    <h1 id="textoTitulo">Seja bem-vindo ao lava a jato MRM</h1>
+    <h2>Esse lava a jato vai fazer seu carro ficar brilhando. Com preços incríveis! Com cuidado com seu carro.</h2>
+
+    <p><img id="carroImg" src="Logo_do_lava_a_jato.png" alt="Carro" width="300" height="200"></p>
+
+
+    <!-- Texto alterado que será modificado com JavaScript -->
+    <h1 id="textoAlterado">Esse site foi feito por uma criança de 11 anos chamado Rafael!. Ele está criando uma empresa de lava a jato com seu irmão, primo. Aproveite as promoções!</h1>
+
+    <!-- Botão para redirecionamento para outra página -->
+    <button type="button" onclick="window.location.href='segunda1.html';">Começar a agendar sua lavagem</button>
+
+    <!-- Scripts para alterar conteúdo -->
+    <script>
+        // Função para controlar a altura e a cor do texto
+        window.onload = function() {
+            var texto = document.getElementById('textoAlterado');
+            texto.style.color = 'blue';  // Altera a cor do texto para azul
+            texto.style.fontSize = '15px';  // Altera o tamanho da fonte para 18px
+        };
+
+        // Função para alterar a imagem do carro
+        function alterarImagemCor() {
+            var img = document.getElementById('carroImg');
+            img.src = "fotocarro_roxo1.jpg";  // Troca a imagem do carro
+        }
+
+        // Função para mudar a cor do texto do título
+        function mudarCorTexto() {
+            var titulo = document.getElementById('textoTitulo');
+            titulo.style.color = 'blue';  // Altera a cor do texto para azul
+        }
+    </script>
+
+</body>
+</html>
